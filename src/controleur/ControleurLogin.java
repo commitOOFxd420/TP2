@@ -25,7 +25,6 @@ public class ControleurLogin implements ActionListener {
 		if (e.getSource() == vue.getBtnValider()) {
 			modele.validerLogin(vue.getTextFieldUser().getText(), vue.getTextFieldMdp().getText());
 		} else if (e.getSource() == vue.getBtnQuitter()) {
-			System.out.println("22");
 			modele.quitter();
 		}
 
