@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
+import controleur.ControleurLogin;
+
 public class vueLogin {
 
 	private JFrame frmGestionDesAlbums;
@@ -25,6 +27,7 @@ public class vueLogin {
 	private JLabel lblConnexionLapplication;
 	private JTextField textFieldUser;
 	private JTextField textFieldMdp;
+	private ControleurLogin controleur = new ControleurLogin(this);
 
 	/**
 	 * Launch the application.
@@ -35,6 +38,7 @@ public class vueLogin {
 				try {
 					vueLogin window = new vueLogin();
 					window.frmGestionDesAlbums.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,19 +74,23 @@ public class vueLogin {
 			panel.add(getBtnValider());
 			panel.add(getTextFieldUser());
 			panel.add(getTextFieldMdp());
+			
+			
 		}
 		return panel;
 	}
-	private JButton getBtnQuitter() {
+	public JButton getBtnQuitter() {
 		if (btnQuitter == null) {
 			btnQuitter = new JButton("Quitter");
+			btnQuitter.addActionListener(controleur);
 			btnQuitter.setBounds(156, 148, 89, 23);
 		}
 		return btnQuitter;
 	}
-	private JButton getBtnValider() {
+	public JButton getBtnValider() {
 		if (btnValider == null) {
 			btnValider = new JButton("Valider");
+			btnValider.addActionListener(controleur);
 			btnValider.setBounds(57, 148, 89, 23);
 		}
 		return btnValider;
@@ -109,7 +117,7 @@ public class vueLogin {
 		}
 		return lblConnexionLapplication;
 	}
-	private JTextField getTextFieldUser() {
+	public JTextField getTextFieldUser() {
 		if (textFieldUser == null) {
 			textFieldUser = new JTextField();
 			textFieldUser.setBounds(148, 66, 122, 20);
@@ -117,7 +125,7 @@ public class vueLogin {
 		}
 		return textFieldUser;
 	}
-	private JTextField getTextFieldMdp() {
+	public  JTextField getTextFieldMdp() {
 		if (textFieldMdp == null) {
 			textFieldMdp = new JTextField();
 			textFieldMdp.setColumns(10);
