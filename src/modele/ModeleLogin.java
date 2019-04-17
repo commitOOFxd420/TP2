@@ -15,6 +15,6 @@ public class ModeleLogin {
 	}
 
 	public void quitter(){
-		System.exit(1);
+		System.exit( 1 );
 	}
 }
