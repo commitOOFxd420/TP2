@@ -1,15 +1,21 @@
 package modele;
 
+import vue.VueTraitement;
+import vue.vueLogin;
+
 public class ModeleLogin {
 
 	
 	String usernameValide = "bob";
 	String mdpValide = "123";
 	
-	public void validerLogin(String username, String mdp){
+	public void validerLogin(String username, String mdp, vueLogin vue){
 		
 		if(username.equals(usernameValide) && mdp.equals(mdpValide)){
 			// Afficher le frame gestion Artistes.
+			VueTraitement traitement = new VueTraitement();
+			vue.getFrame().setVisible( false );
+			traitement.getFrame().setVisible( true );
 		}
 		
 	}

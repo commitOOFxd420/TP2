@@ -17,6 +17,10 @@ import javax.swing.AbstractListModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controleur.ControleurArtiste;
+
+import javax.swing.JScrollPane;
+
 public class VueGestionArtiste {
 
 	private JFrame frmGestionsDesArtistes;
@@ -24,6 +28,8 @@ public class VueGestionArtiste {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTable table;
+	private ControleurArtiste controleur;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -45,7 +51,18 @@ public class VueGestionArtiste {
 	 * Create the application.
 	 */
 	public VueGestionArtiste() {
+		controleur = new ControleurArtiste(this);
+		table = controleur.initialiserTableau(table);
 		initialize();
+
+	}
+	
+	public JFrame getFrame() {
+		return this.frmGestionsDesArtistes;
+	}
+	
+	public JTable getTableau() {
+		return this.table;
 	}
 
 	/**
@@ -168,34 +185,18 @@ public class VueGestionArtiste {
 		label.setBounds(419, 299, 81, 44);
 		panel.add(label);
 		
-		table = new JTable();
-		table.setFont(new Font("Verdana", Font.PLAIN, 12));
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"No.", "Nom", "Membre"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(2).setResizable(false);
-		table.setBounds(127, 86, 284, 177);
-		table.setCellEditor( null );
-		panel.add(table);
+		table.getColumnModel().getColumn(0).setMinWidth(25);
+		table.getColumnModel().getColumn(0).setMaxWidth(25);
+
+		table.getColumnModel().getColumn(2).setMinWidth(27);
+		table.getColumnModel().getColumn(2).setMaxWidth(50);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(122, 69, 295, 202);
+
+		panel.add(scrollPane);
+		
+		scrollPane.setViewportView(table);
+
 	}
 }

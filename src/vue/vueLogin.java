@@ -52,6 +52,9 @@ public class vueLogin {
 	public vueLogin() {
 		initialize();
 	}
+	public JFrame getFrame() {
+		return this.frmGestionDesAlbums;
+	}
 
 	/**
 	 * Initialize the contents of the frame.

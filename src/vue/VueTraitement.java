@@ -4,11 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import controleur.ControleurTraitement;
+
 import javax.swing.JButton;
 
 public class VueTraitement {
 
 	private JFrame frmChoix;
+	private JButton btnArtiste;
+	private JButton btnAlbums;
+	private JButton btnQuitter;
+	private ControleurTraitement controleur = new ControleurTraitement(this);
 
 	/**
 	 * Launch the application.
@@ -32,6 +39,22 @@ public class VueTraitement {
 	public VueTraitement() {
 		initialize();
 	}
+	
+	public JButton getBtnArtiste() {
+		return btnArtiste;
+	}
+	
+	public JButton getBtnAlbums() {
+		return btnAlbums;
+	}
+	
+	public JButton getBtnQuitter() {
+		return btnQuitter;
+	}
+	
+	public JFrame getFrame() {
+		return this.frmChoix;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -47,15 +70,19 @@ public class VueTraitement {
 		lblNewLabel.setBounds(42, 11, 242, 14);
 		frmChoix.getContentPane().add(lblNewLabel);
 		
-		JButton btnArtiste = new JButton("G\u00E9rer artistes");
+		btnArtiste = new JButton("G\u00E9rer artistes");
 		btnArtiste.setBounds(25, 36, 120, 23);
+		btnArtiste.addActionListener( controleur );
 		frmChoix.getContentPane().add(btnArtiste);
 		
-		JButton btnAlbums = new JButton("G\u00E9rer albums");
+		
+		btnAlbums = new JButton("G\u00E9rer albums");
 		btnAlbums.setBounds(169, 36, 120, 23);
+		btnAlbums.addActionListener( controleur );
 		frmChoix.getContentPane().add(btnAlbums);
 		
-		JButton btnQuitter = new JButton("Quitter");
+		btnQuitter = new JButton("Quitter");
+		btnQuitter.addActionListener( controleur );
 		btnQuitter.setBounds(106, 63, 99, 23);
 		frmChoix.getContentPane().add(btnQuitter);
 	}
