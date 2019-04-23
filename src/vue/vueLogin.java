@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.Insets;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -26,7 +28,7 @@ public class vueLogin {
 	private JLabel lblNewLabel;
 	private JLabel lblConnexionLapplication;
 	private JTextField textFieldUser;
-	private JTextField textFieldMdp;
+	private JPasswordField passwordField;
 	private ControleurLogin controleur = new ControleurLogin(this);
 
 	/**
@@ -128,12 +130,12 @@ public class vueLogin {
 		}
 		return textFieldUser;
 	}
-	public  JTextField getTextFieldMdp() {
-		if (textFieldMdp == null) {
-			textFieldMdp = new JTextField();
-			textFieldMdp.setColumns(10);
-			textFieldMdp.setBounds(148, 103, 122, 20);
+	public  JPasswordField getTextFieldMdp() {
+		if (passwordField == null) {
+			passwordField = new JPasswordField();
+			passwordField.setColumns(10);
+			passwordField.setBounds(148, 103, 122, 20);
 		}
-		return textFieldMdp;
+		return passwordField;
 	}
 }

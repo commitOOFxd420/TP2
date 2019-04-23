@@ -15,7 +15,6 @@ public class ControleurTraitement implements ActionListener{
 
 		this.vue = vue;
 		modele = new ModeleTraitement(vue);
-		System.out.println( "ok?" );
 	}
 	
 	@Override

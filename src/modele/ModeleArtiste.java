@@ -10,6 +10,7 @@ public class ModeleArtiste {
 	
 	public void connectionBD() {
 		try {
+			
 			Class.forName( "org.sqlite.JDBC" );
 			connexion = DriverManager.getConnection(  "jdbc:sqlite:sqlite//db//Ouellette-Valiquette-Albums.db"  );
 			
@@ -27,12 +28,13 @@ public class ModeleArtiste {
 		ArrayList<Artistes> donnees = new ArrayList<Artistes>();
 		if ( connexion != null ) {
 			try {
+				
 				statement = connexion.createStatement();
 
 				ResultSet jeuResultats = statement.executeQuery( "SELECT * FROM artistes " );
 
 				while ( jeuResultats.next() ) {
-					donnees.add( new Artistes(jeuResultats.getString( "ArtisteID" ), jeuResultats.getString( "nom" ), jeuResultats.getBoolean( "Membre" )) );
+					donnees.add( new Artistes(jeuResultats.getString( "ArtisteID" ), jeuResultats.getString( "nom" ), jeuResultats.getBoolean( "Membre" ), jeuResultats.getString( "Photo" )) );
 
 				}
 
