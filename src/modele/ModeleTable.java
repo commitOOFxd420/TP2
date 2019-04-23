@@ -20,17 +20,17 @@ public class ModeleTable extends AbstractTableModel{
 		lesDonnees = donnees;
 	}
 	
-	@Override
+	//@Override
 	public int getColumnCount() {
 		return lesTitres.length;
 	}
 
-	@Override
+	//@Override
 	public int getRowCount() {
 		return lesDonnees.size();
 	}
 
-	@Override
+	//@Override
 	public Object getValueAt( int rowIndex, int columnIndex ) {
 		
 		switch(columnIndex) {

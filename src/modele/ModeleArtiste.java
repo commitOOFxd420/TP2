@@ -3,6 +3,11 @@ package modele;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
+import javax.swing.JTextField;
+
+import vue.VueGestionArtiste;
+
 public class ModeleArtiste {
 
 	private Connection connexion = null;
@@ -55,6 +60,35 @@ public class ModeleArtiste {
 		} catch ( SQLException se ) {
 			System.out.println( "Erreur lors de la fermeture de la base de donné" );
 		}
+	}
+	
+	public void activerEtVider(VueGestionArtiste vue) {
+	
+		vue.textField_1.setEditable(true);
+		vue.textField_1.setText("");
+		//Ajouter le numéro à partir de la BDD
+		vue.checkMembre.setSelected(false);
+		
+		
+	}
+	
+	public void insererArtiste(VueGestionArtiste vue) {
+		
+		if(vue.textField_1.isEditable()) {
+			String num = vue.textField.getText();
+			String nom = vue.textField_1.getText();
+			boolean membre =  vue.checkMembre.isSelected();
+			
+			if(connexion == null) {
+				try {
+					statement = connexion.createStatement();
+					statement.executeQuery("INSERT INTO artistes VALUES " + num + ", " + nom + ", " + membre);
+				} catch(SQLException se) {
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
 	}
 	
 }

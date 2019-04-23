@@ -17,7 +17,7 @@ public class ControleurTraitement implements ActionListener{
 		modele = new ModeleTraitement(vue);
 	}
 	
-	@Override
+	//@Override
 	public void actionPerformed( ActionEvent e ) {
 		if (e.getSource() ==vue.getBtnAlbums()) {
 			modele.ouvrirAlbums();

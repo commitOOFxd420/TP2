@@ -1,6 +1,8 @@
 package controleur;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -11,15 +13,15 @@ import modele.ModeleArtiste;
 import modele.ModeleTable;
 import vue.VueGestionArtiste;
 
-public class ControleurArtiste {
+public class ControleurArtiste implements ActionListener{
 
-	VueGestionArtiste artiste;
+	VueGestionArtiste vueArtiste;
 	ModeleArtiste modele;
 	ModeleTable modeleTable;
 	
 	public ControleurArtiste (VueGestionArtiste artiste) {
 		
-		this.artiste = artiste;
+		this.vueArtiste = artiste;
 		modele = new ModeleArtiste();
 	}
 	
@@ -43,5 +45,17 @@ public class ControleurArtiste {
 		return table;
 
 	}
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == vueArtiste.btnNouveau) {
+			modele.activerEtVider(vueArtiste);
+		} else if(e.getSource() == vueArtiste.btnAjouter) {
+			modele.insererArtiste(vueArtiste);
+		}
+		
+		
+	}
+	
+	
 	
 }

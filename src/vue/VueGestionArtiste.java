@@ -25,11 +25,15 @@ public class VueGestionArtiste {
 
 	private JFrame frmGestionsDesArtistes;
 	private JTextField textRechercheArtiste;
-	private JTextField textField;
-	private JTextField textField_1;
+	public JTextField textField;
+	public JTextField textField_1;
 	private JTable table;
 	private ControleurArtiste controleur;
 	private JScrollPane scrollPane;
+	public JButton btnAjouter;
+	public JButton btnNouveau;
+	public JCheckBox checkMembre = new JCheckBox("");
+	
 
 	/**
 	 * Launch the application.
@@ -138,7 +142,7 @@ public class VueGestionArtiste {
 		textField_1.setBounds(75, 323, 148, 20);
 		panel.add(textField_1);
 		
-		JCheckBox checkMembre = new JCheckBox("");
+		
 		checkMembre.setFocusable(false);
 		checkMembre.setFont(new Font("Verdana", Font.PLAIN, 12));
 		checkMembre.setBounds(75, 350, 97, 23);
@@ -155,14 +159,16 @@ public class VueGestionArtiste {
 		btnRemplacer.setBounds(2, 194, 110, 23);
 		panel.add(btnRemplacer);
 		
-		JButton btnNouveau = new JButton("Nouveau");
+		btnNouveau = new JButton("Nouveau");
 		btnNouveau.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnNouveau.setBounds(427, 105, 107, 23);
+		btnNouveau.addActionListener(controleur);
 		panel.add(btnNouveau);
 		
-		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnAjouter.setBounds(427, 139, 107, 23);
+		btnAjouter.addActionListener(controleur);
 		panel.add(btnAjouter);
 		
 		JButton btnModifier = new JButton("Modifier");
@@ -198,5 +204,21 @@ public class VueGestionArtiste {
 		
 		scrollPane.setViewportView(table);
 
+	}
+	
+	public JButton getBtnNouveau() {
+		return btnNouveau;
+	}
+	
+	public JTextField getTextFieldNumero() {
+		return textField;
+	}
+	
+	public JTextField getTextFieldNom() {
+		return textField_1;
+	}
+	
+	public JCheckBox getcheckMembre() {
+		return checkMembre;
 	}
 }
