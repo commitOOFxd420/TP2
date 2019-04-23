@@ -55,13 +55,17 @@ public class ModeleTable extends AbstractTableModel{
 	
 	@Override
 	public Class<?> getColumnClass( int columnIndex ) {
-		// TODO Auto-generated method stub
 		switch (columnIndex) {
 		case 0 :return String.class;
 		case 1:return String.class;
 		case 2:return Boolean.class;
 		default:throw new IllegalArgumentException( "Index de colonne invalide :" + columnIndex );
 		}
+	}
+	
+	public Artistes getArtiste(int row) {
+		
+		return lesDonnees.get( row );
 	}
 
 }

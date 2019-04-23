@@ -1,7 +1,5 @@
 package vue;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -16,22 +14,6 @@ public class VueTraitement {
 	private JButton btnAlbums;
 	private JButton btnQuitter;
 	private ControleurTraitement controleur = new ControleurTraitement(this);
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			public void run() {
-				try {
-					VueTraitement window = new VueTraitement();
-					window.frmChoix.setVisible( true );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		} );
-	}
 
 	/**
 	 * Create the application.

@@ -1,6 +1,5 @@
 package vue;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,11 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
-import javax.swing.JScrollBar;
 import javax.swing.ListSelectionModel;
-import javax.swing.AbstractListModel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import controleur.ControleurArtiste;
 
@@ -25,38 +21,22 @@ public class VueGestionArtiste {
 
 	private JFrame frmGestionsDesArtistes;
 	private JTextField textRechercheArtiste;
-	public JTextField textField;
-	public JTextField textField_1;
+	public JTextField textNum;
+	public JTextField textNom;
 	private JTable table;
 	private ControleurArtiste controleur;
 	private JScrollPane scrollPane;
 	public JButton btnAjouter;
 	public JButton btnNouveau;
 	public JCheckBox checkMembre = new JCheckBox("");
+	public JLabel labelImageArtiste;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main( String[] args ) {
-		EventQueue.invokeLater( new Runnable() {
-			public void run() {
-				try {
-					VueGestionArtiste window = new VueGestionArtiste();
-					window.frmGestionsDesArtistes.setVisible( true );
-				} catch ( Exception e ) {
-					e.printStackTrace();
-				}
-			}
-		} );
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public VueGestionArtiste() {
-		controleur = new ControleurArtiste(this);
-		table = controleur.initialiserTableau(table);
+
 		initialize();
 
 	}
@@ -73,6 +53,9 @@ public class VueGestionArtiste {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		controleur = new ControleurArtiste(this);
+		table = controleur.initialiserTableau(table);
+		
 		frmGestionsDesArtistes = new JFrame();
 		frmGestionsDesArtistes.setTitle("Gestions des artistes");
 		frmGestionsDesArtistes.setBounds( 100, 100, 550, 440 );
@@ -128,19 +111,19 @@ public class VueGestionArtiste {
 		lblMembre.setBounds(10, 359, 74, 14);
 		panel.add(lblMembre);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setFont(new Font("Verdana", Font.PLAIN, 12));
-		textField.setBounds(75, 296, 148, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textNum = new JTextField();
+		textNum.setEditable(false);
+		textNum.setFont(new Font("Verdana", Font.PLAIN, 12));
+		textNum.setBounds(75, 296, 148, 20);
+		panel.add(textNum);
+		textNum.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setFont(new Font("Verdana", Font.PLAIN, 12));
-		textField_1.setColumns(10);
-		textField_1.setBounds(75, 323, 148, 20);
-		panel.add(textField_1);
+		textNom = new JTextField();
+		textNom.setEditable(false);
+		textNom.setFont(new Font("Verdana", Font.PLAIN, 12));
+		textNom.setColumns(10);
+		textNom.setBounds(75, 323, 148, 20);
+		panel.add(textNom);
 		
 		
 		checkMembre.setFocusable(false);
@@ -156,7 +139,7 @@ public class VueGestionArtiste {
 		
 		JButton btnRemplacer = new JButton("Remplacer");
 		btnRemplacer.setFont(new Font("Verdana", Font.PLAIN, 12));
-		btnRemplacer.setBounds(2, 194, 110, 23);
+		btnRemplacer.setBounds(2, 205, 110, 23);
 		panel.add(btnRemplacer);
 		
 		btnNouveau = new JButton("Nouveau");
@@ -181,22 +164,23 @@ public class VueGestionArtiste {
 		btnSupprimer.setBounds(427, 207, 107, 23);
 		panel.add(btnSupprimer);
 		
-		JLabel lblNewLabel = new JLabel("Aucune image charg\u00E9e");
-		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblNewLabel.setBounds(10, 128, 81, 44);
-		panel.add(lblNewLabel);
+		labelImageArtiste = new JLabel();
+		labelImageArtiste.setFont(new Font("Verdana", Font.PLAIN, 12));
+		labelImageArtiste.setBounds(5, 100, 110, 110);
+		panel.add(labelImageArtiste);
 		
-		JLabel label = new JLabel("Aucune image charg\u00E9e");
-		label.setFont(new Font("Verdana", Font.PLAIN, 12));
-		label.setBounds(419, 299, 81, 44);
-		panel.add(label);
+		JLabel labelImageAlbum = new JLabel();
+		labelImageAlbum.setFont(new Font("Verdana", Font.PLAIN, 12));
+		labelImageAlbum.setBounds(419, 299, 81, 44);
+		panel.add(labelImageAlbum);
 		
 		table.getColumnModel().getColumn(0).setMinWidth(25);
 		table.getColumnModel().getColumn(0).setMaxWidth(25);
 
 		table.getColumnModel().getColumn(2).setMinWidth(27);
 		table.getColumnModel().getColumn(2).setMaxWidth(50);
-
+		
+		table.addMouseListener( controleur );
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(122, 69, 295, 202);
 
@@ -211,11 +195,11 @@ public class VueGestionArtiste {
 	}
 	
 	public JTextField getTextFieldNumero() {
-		return textField;
+		return textNum;
 	}
 	
 	public JTextField getTextFieldNom() {
-		return textField_1;
+		return textNom;
 	}
 	
 	public JCheckBox getcheckMembre() {

@@ -1,19 +1,13 @@
 package vue;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import javax.swing.JButton;
-import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import java.awt.Insets;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
 import controleur.ControleurLogin;
@@ -30,23 +24,6 @@ public class vueLogin {
 	private JTextField textFieldUser;
 	private JPasswordField passwordField;
 	private ControleurLogin controleur = new ControleurLogin(this);
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					vueLogin window = new vueLogin();
-					window.frmGestionDesAlbums.setVisible(true);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -103,14 +80,14 @@ public class vueLogin {
 	private JLabel getLblMotDePasse() {
 		if (lblMotDePasse == null) {
 			lblMotDePasse = new JLabel("Mot de passe");
-			lblMotDePasse.setBounds(56, 106, 64, 14);
+			lblMotDePasse.setBounds(38, 106, 100, 14);
 		}
 		return lblMotDePasse;
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Nom d'utilisateur");
-			lblNewLabel.setBounds(57, 69, 79, 14);
+			lblNewLabel.setBounds(37, 69, 100, 14);
 		}
 		return lblNewLabel;
 	}
