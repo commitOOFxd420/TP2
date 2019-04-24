@@ -100,23 +100,96 @@ public class ModeleArtiste {
 		
 	}
 	
+
+	
 	public void afficherInfoArtiste ( ModeleTable modeleTable) {		
 		int numLigne = vue.getTableau().getSelectedRow();
 		Artistes artiste = modeleTable.getArtiste(numLigne);
 		vue.textNum.setText( artiste.getNum() );
 		vue.textNom.setText( artiste.getNom() );
 		vue.checkMembre.setSelected( artiste.getMembre() );
+		
+		ImageIcon imageIcon;
+		Image image;
+		Image nouvelleImage;
 		try {
-		ImageIcon imageIcon = new ImageIcon(chemin + "\\images\\" + artiste.getPhoto());
-		Image image = imageIcon.getImage();
-		Image nouvelleImage = image.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
+		imageIcon = new ImageIcon(chemin + "\\images\\artistes\\" + artiste.getPhoto());
+		image = imageIcon.getImage();
+		nouvelleImage = image.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
 		imageIcon = new ImageIcon(nouvelleImage);
 		vue.labelImageArtiste.setIcon( imageIcon );
 
 		} catch (Exception e) {
-			System.out.println( "Erreur lors du chargement de l'image" );
-		}
+			imageIcon = new ImageIcon(chemin + "\\images\\artistes\\defaut.png");
+			image = imageIcon.getImage();
+			nouvelleImage = image.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
+			imageIcon = new ImageIcon(nouvelleImage);
+			vue.labelImageArtiste.setIcon( imageIcon );		}
 		
+	}
+	
+	public ArrayList<Albums> obtenirAlbums (int artisteID) {
+		ArrayList<Albums> albums = new ArrayList<Albums>();
+		
+		if ( connexion != null ) {
+			try {
+				
+				statement = connexion.createStatement();
+
+				ResultSet jeuResultats = statement.executeQuery( "SELECT * FROM albums where artisteID = '" + artisteID + "';" );
+				
+				while ( jeuResultats.next() ) {
+					albums.add( new Albums(jeuResultats.getInt( "albumID" ), jeuResultats.getString( "Titre" )
+							, jeuResultats.getString( "Genre" ), jeuResultats.getString( "AnneeSortie" ) 
+							, jeuResultats.getString( "ImageCouverture" ), jeuResultats.getInt( "artisteID" )) );
+				}
+
+			} catch ( SQLException se ) {
+				System.out.println( se.getMessage() );
+			}
+		
+		}
+		return albums;
+		
+	}
+	
+	public void afficherAlbum (ModeleTable modeleTable) {
+		
+		vue.dataModel.clear();
+
+		int numLigne = vue.getTableau().getSelectedRow();
+		Artistes artisteTemp = modeleTable.getArtiste( numLigne );
+		ArrayList<Albums> albums = obtenirAlbums(Integer.parseInt( artisteTemp.getNum()));
+		
+		for ( Albums album : albums ) {
+			vue.dataModel.addElement( album );
+		}
+	}
+	
+	public void afficherImageAlbum() {
+		if ( !vue.listAlbums.isSelectionEmpty() ) {
+			Albums albumTemp = vue.dataModel.get( vue.listAlbums.getSelectedIndex() );
+
+			ImageIcon imageIcon;
+			Image image, nouvelleImage;
+			
+			try {
+				imageIcon = new ImageIcon( chemin + "\\images\\albums\\" + albumTemp.getImageCouverture() );
+				image = imageIcon.getImage();
+				nouvelleImage = image.getScaledInstance( 140, 140, Image.SCALE_SMOOTH );
+				imageIcon = new ImageIcon( nouvelleImage );
+				vue.labelImageAlbum.setIcon( imageIcon );
+
+			} catch ( Exception e ) {
+				imageIcon = new ImageIcon( chemin + "\\images\\albums\\defaut.png");
+				image = imageIcon.getImage();
+				nouvelleImage = image.getScaledInstance( 140, 140, Image.SCALE_SMOOTH );
+				imageIcon = new ImageIcon( nouvelleImage );
+				vue.labelImageAlbum.setIcon( imageIcon );
+			}
+		} else {
+			vue.labelImageAlbum.setIcon( null );
+		}
 	}
 	
 	public void modifierInfoArtiste (ModeleTable modelTable) {

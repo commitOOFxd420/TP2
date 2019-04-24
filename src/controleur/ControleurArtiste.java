@@ -9,13 +9,15 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import modele.Artistes;
 import modele.ModeleArtiste;
 import modele.ModeleTable;
 import vue.VueGestionArtiste;
 
-public class ControleurArtiste implements ActionListener, MouseListener{
+public class ControleurArtiste implements ActionListener, MouseListener, ListSelectionListener{
 
 	VueGestionArtiste vueArtiste;
 	ModeleArtiste modele;
@@ -62,10 +64,16 @@ public class ControleurArtiste implements ActionListener, MouseListener{
 
 	@Override
 	public void mouseClicked( MouseEvent e ) {
-		if (e.getClickCount() == 1)
+		
+		if (e.getClickCount() == 1) {
 		modele.afficherInfoArtiste( modeleTable );
-		else if (e.getClickCount() == 2)
+		modele.connectionBD();
+		modele.afficherAlbum(modeleTable);
+		modele.fermerBD();
+		
+		}else if (e.getClickCount() == 2) {
 			modele.modifierInfoArtiste(modeleTable);
+		}
 	}
 
 	@Override
@@ -89,6 +97,14 @@ public class ControleurArtiste implements ActionListener, MouseListener{
 	@Override
 	public void mouseReleased( MouseEvent e ) {
 		// TODO Auto-generated method stub
+		
+		
+	}
+
+	@Override
+	public void valueChanged( ListSelectionEvent arg0 ) {
+		
+		modele.afficherImageAlbum();
 		
 	}
 	

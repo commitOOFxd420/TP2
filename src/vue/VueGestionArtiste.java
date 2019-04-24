@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
@@ -14,6 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 
 import controleur.ControleurArtiste;
+import modele.Albums;
 
 import javax.swing.JScrollPane;
 
@@ -30,6 +33,9 @@ public class VueGestionArtiste {
 	public JButton btnNouveau;
 	public JCheckBox checkMembre = new JCheckBox("");
 	public JLabel labelImageArtiste;
+	public DefaultListModel<Albums> dataModel = new DefaultListModel<Albums>(); 
+	public JList<Albums> listAlbums;
+	public JLabel labelImageAlbum;
 	
 
 	/**
@@ -131,7 +137,8 @@ public class VueGestionArtiste {
 		checkMembre.setBounds(75, 350, 97, 23);
 		panel.add(checkMembre);
 		
-		JList listAlbums = new JList();
+		listAlbums = new JList<Albums>(dataModel);
+		listAlbums.addListSelectionListener( controleur );
 		listAlbums.setFont(new Font("Verdana", Font.PLAIN, 12));
 		listAlbums.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAlbums.setBounds(233, 298, 137, 79);
@@ -169,9 +176,9 @@ public class VueGestionArtiste {
 		labelImageArtiste.setBounds(5, 100, 110, 110);
 		panel.add(labelImageArtiste);
 		
-		JLabel labelImageAlbum = new JLabel();
+		labelImageAlbum = new JLabel();
 		labelImageAlbum.setFont(new Font("Verdana", Font.PLAIN, 12));
-		labelImageAlbum.setBounds(419, 299, 81, 44);
+		labelImageAlbum.setBounds(385, 190, 300, 300);
 		panel.add(labelImageAlbum);
 		
 		table.getColumnModel().getColumn(0).setMinWidth(25);
