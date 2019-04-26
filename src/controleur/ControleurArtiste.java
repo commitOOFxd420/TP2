@@ -33,17 +33,9 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		
 		modele.connectionBD();
 		ArrayList<Artistes> donnees = modele.obtenirContenuTable();
-		for ( Artistes artiste : donnees ) {
-			artiste.toString();
-		}
 		modeleTable = new ModeleTable( donnees );
 		table = new JTable(modeleTable);
-		table.setFont(new Font("Verdana", Font.PLAIN, 12));
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-
-		
-		
+			
 		modele.fermerBD();
 		
 		return table;
@@ -52,17 +44,26 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == vueArtiste.btnNouveau) {
+			modele.connectionBD();
 			modele.activerEtVider();
+			modele.fermerBD();
+			vueArtiste.btnAjouter.setEnabled(true);
+			
 		} else if(e.getSource() == vueArtiste.btnAjouter) {
 			modele.connectionBD();
 			modele.insererArtiste();
+			modele.refreshTable(modeleTable);
 			modele.fermerBD();
+			vueArtiste.btnAjouter.setEnabled(false);
+			modele.desactiverEtVider();
 		}
 		
 		
 	}
+	
 
-	@Override
+
+	//@Override
 	public void mouseClicked( MouseEvent e ) {
 		
 		if (e.getClickCount() == 1) {
@@ -76,32 +77,32 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		}
 	}
 
-	@Override
+	//@Override
 	public void mouseEntered( MouseEvent e ) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	//@Override
 	public void mouseExited( MouseEvent e ) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	//@Override
 	public void mousePressed( MouseEvent e ) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	//@Override
 	public void mouseReleased( MouseEvent e ) {
 		// TODO Auto-generated method stub
 		
 		
 	}
 
-	@Override
+	//@Override
 	public void valueChanged( ListSelectionEvent arg0 ) {
 		
 		modele.afficherImageAlbum();

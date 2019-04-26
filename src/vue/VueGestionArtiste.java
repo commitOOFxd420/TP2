@@ -159,6 +159,7 @@ public class VueGestionArtiste {
 		btnAjouter.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnAjouter.setBounds(427, 139, 107, 23);
 		btnAjouter.addActionListener(controleur);
+		btnAjouter.setEnabled(false);
 		panel.add(btnAjouter);
 		
 		JButton btnModifier = new JButton("Modifier");
@@ -186,6 +187,9 @@ public class VueGestionArtiste {
 
 		table.getColumnModel().getColumn(2).setMinWidth(27);
 		table.getColumnModel().getColumn(2).setMaxWidth(50);
+		
+		table.setFont(new Font("Verdana", Font.PLAIN, 12));
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		table.addMouseListener( controleur );
 		scrollPane = new JScrollPane();
