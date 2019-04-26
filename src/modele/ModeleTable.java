@@ -67,5 +67,11 @@ public class ModeleTable extends AbstractTableModel{
 		
 		return lesDonnees.get( row );
 	}
+	
+	public void setArtisteAt (int row, Artistes artiste) {
+		
+		lesDonnees.set( row, artiste );
+		lesDonnees.remove( row +1 );
+	}
 
 }

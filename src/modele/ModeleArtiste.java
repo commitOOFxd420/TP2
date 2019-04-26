@@ -113,7 +113,6 @@ public class ModeleArtiste {
 			if (connexion != null) {
 				try {
 					String sql = ("INSERT INTO artistes (nom, Membre, Photo) VALUES (?, ?, ?)");
-					System.out.println("INSERT INTO artistes (nom, Membre, Photo) VALUES (?, ?, ?)");
 					
 					PreparedStatement prt = connexion.prepareStatement(sql);
 					prt.setString(1, nom);
@@ -147,7 +146,7 @@ public class ModeleArtiste {
 			nouvelleImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 			imageIcon = new ImageIcon(nouvelleImage);
 			vue.labelImageArtiste.setIcon(imageIcon);
-
+		
 		} catch (Exception e) {
 			imageIcon = new ImageIcon(chemin + "\\images\\artistes\\defaut.png");
 			image = imageIcon.getImage();
@@ -155,6 +154,9 @@ public class ModeleArtiste {
 			imageIcon = new ImageIcon(nouvelleImage);
 			vue.labelImageArtiste.setIcon(imageIcon);
 		}
+		
+		vue.textNom.setEditable( false );
+		vue.btnModifier.setEnabled( false );
 
 	}
 
@@ -223,8 +225,12 @@ public class ModeleArtiste {
 		}
 	}
 
-	public void modifierInfoArtiste(ModeleTable modelTable) {
+	public void activerModification() {
 
+		vue.textNom.setEditable( true );
+		vue.btnModifier.setEnabled( true );	
+		
+		
 	}
 	
 	public void refreshTable(ModeleTable modeleTable) {
@@ -238,6 +244,38 @@ public class ModeleArtiste {
 
 		vue.getTableau().getColumnModel().getColumn(2).setMinWidth(27);
 		vue.getTableau().getColumnModel().getColumn(2).setMaxWidth(50);
+		
+		vue.textNom.setEditable( false );
+		
 	}
 
+	
+	public ModeleTable modifierArtiste(ModeleTable modeleTable) {
+		int numLigne = vue.getTableau().getSelectedRow();
+		Artistes artiste = modeleTable.getArtiste(numLigne);
+		if (connexion != null) {
+			
+			try {
+				PreparedStatement preSta = connexion.prepareStatement( "UPDATE artistes SET nom = ?,"
+						+ " Membre = ? WHERE ArtisteID = ?");
+				
+				preSta.setString( 1, vue.textNom.getText() );
+				preSta.setBoolean( 2, vue.checkMembre.isSelected() );
+				preSta.setInt( 3, Integer.parseInt( artiste.getNum() )  );
+				
+				preSta.executeUpdate();
+				artiste.setNom( vue.textNom.getText() );				
+				artiste.setMembre( vue.checkMembre.isSelected() );
+				modeleTable.setArtisteAt( numLigne, artiste );
+				
+			} catch ( SQLException se ) {
+				System.out.println(se.getMessage());
+			}
+								
+		}
+		
+		return modeleTable;
+
+		
+	}
 }

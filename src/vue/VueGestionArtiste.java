@@ -23,19 +23,15 @@ import javax.swing.JScrollPane;
 public class VueGestionArtiste {
 
 	private JFrame frmGestionsDesArtistes;
-	private JTextField textRechercheArtiste;
-	public JTextField textNum;
-	public JTextField textNom;
+	public JTextField textRechercheArtiste, textNum, textNom;
 	private JTable table;
 	private ControleurArtiste controleur;
 	private JScrollPane scrollPane;
-	public JButton btnAjouter;
-	public JButton btnNouveau;
+	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier;
 	public JCheckBox checkMembre = new JCheckBox("");
-	public JLabel labelImageArtiste;
+	public JLabel labelImageArtiste, labelImageAlbum;
 	public DefaultListModel<Albums> dataModel = new DefaultListModel<Albums>(); 
 	public JList<Albums> listAlbums;
-	public JLabel labelImageAlbum;
 	
 
 	/**
@@ -53,6 +49,18 @@ public class VueGestionArtiste {
 	
 	public JTable getTableau() {
 		return this.table;
+	}
+	
+	public JButton getBtnRemplacer() {
+		return this.btnRemplacer;
+	}
+	
+	public JButton getBtnSupprimer() {
+		return this.btnSupprimer;
+	}
+	
+	public JButton getBtnModifier() {
+		return this.btnModifier;
 	}
 
 	/**
@@ -144,9 +152,10 @@ public class VueGestionArtiste {
 		listAlbums.setBounds(233, 298, 137, 79);
 		panel.add(listAlbums);
 		
-		JButton btnRemplacer = new JButton("Remplacer");
+		btnRemplacer = new JButton("Remplacer");
 		btnRemplacer.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnRemplacer.setBounds(2, 205, 110, 23);
+		btnRemplacer.addActionListener( controleur );
 		panel.add(btnRemplacer);
 		
 		btnNouveau = new JButton("Nouveau");
@@ -162,14 +171,17 @@ public class VueGestionArtiste {
 		btnAjouter.setEnabled(false);
 		panel.add(btnAjouter);
 		
-		JButton btnModifier = new JButton("Modifier");
+		btnModifier = new JButton("Modifier");
 		btnModifier.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnModifier.setBounds(427, 173, 107, 23);
+		btnModifier.setEnabled( false );
+		btnModifier.addActionListener( controleur );
 		panel.add(btnModifier);
 		
-		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnSupprimer.setBounds(427, 207, 107, 23);
+		btnSupprimer.addActionListener( controleur );
 		panel.add(btnSupprimer);
 		
 		labelImageArtiste = new JLabel();
@@ -181,6 +193,7 @@ public class VueGestionArtiste {
 		labelImageAlbum.setFont(new Font("Verdana", Font.PLAIN, 12));
 		labelImageAlbum.setBounds(385, 190, 300, 300);
 		panel.add(labelImageAlbum);
+		
 		
 		table.getColumnModel().getColumn(0).setMinWidth(25);
 		table.getColumnModel().getColumn(0).setMaxWidth(25);

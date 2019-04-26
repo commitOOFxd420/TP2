@@ -44,11 +44,11 @@ public class Artistes {
 	}
 	
 	public void setNom(String pNom) {
-		num = pNom;
+		nom = pNom;
 	}
 	
-	public void setMembre(String pMembre) {
-		num = pMembre;
+	public void setMembre(boolean pMembre) {
+		membre = pMembre;
 	}
 	
 	@Override

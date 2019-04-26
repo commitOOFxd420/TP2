@@ -44,19 +44,39 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == vueArtiste.btnNouveau) {
+			
 			modele.connectionBD();
 			modele.activerEtVider();
 			modele.fermerBD();
 			vueArtiste.btnAjouter.setEnabled(true);
 			
 		} else if(e.getSource() == vueArtiste.btnAjouter) {
+			
 			modele.connectionBD();
 			modele.insererArtiste();
 			modele.refreshTable(modeleTable);
 			modele.fermerBD();
 			vueArtiste.btnAjouter.setEnabled(false);
 			modele.desactiverEtVider();
-		}
+			
+		} else if (e.getSource() == vueArtiste.getBtnModifier()) {			
+			modele.connectionBD();
+			modeleTable = modele.modifierArtiste( modeleTable );
+			modele.refreshTable( modeleTable );
+			vueArtiste.btnModifier.setEnabled(false);
+
+			modele.fermerBD();
+			
+		}else if (e.getSource() == vueArtiste.getBtnRemplacer()){
+		
+			
+			//TODO appelé méthode pour modifier l'image		
+			
+		} else if (e.getSource() == vueArtiste.getBtnSupprimer()) {
+			
+			
+			
+		} 
 		
 		
 	}
@@ -73,7 +93,7 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		modele.fermerBD();
 		
 		}else if (e.getClickCount() == 2) {
-			modele.modifierInfoArtiste(modeleTable);
+			modele.activerModification();
 		}
 	}
 
