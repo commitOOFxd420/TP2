@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.sql.*;
 import java.util.ArrayList;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import vue.VueGestionArtiste;
@@ -250,7 +249,7 @@ public class ModeleArtiste {
 	}
 
 	
-	public ModeleTable modifierArtiste(ModeleTable modeleTable) {
+	public void modifierArtiste(ModeleTable modeleTable) {
 		int numLigne = vue.getTableau().getSelectedRow();
 		Artistes artiste = modeleTable.getArtiste(numLigne);
 		if (connexion != null) {
@@ -264,9 +263,7 @@ public class ModeleArtiste {
 				preSta.setInt( 3, Integer.parseInt( artiste.getNum() )  );
 				
 				preSta.executeUpdate();
-				artiste.setNom( vue.textNom.getText() );				
-				artiste.setMembre( vue.checkMembre.isSelected() );
-				modeleTable.setArtisteAt( numLigne, artiste );
+
 				
 			} catch ( SQLException se ) {
 				System.out.println(se.getMessage());
@@ -274,8 +271,39 @@ public class ModeleArtiste {
 								
 		}
 		
-		return modeleTable;
-
-		
 	}
+	
+	public void supprimerArtiste( ModeleTable modeleTable ) {
+		if ( vue.getTableau().getSelectedRow() != -1 ) {
+			int numLigne = vue.getTableau().getSelectedRow();
+			Artistes artiste = modeleTable.getArtiste( numLigne );
+
+			if ( connexion != null ) {
+				// Supprimer les albums reliés.
+				try {
+
+					PreparedStatement preSta = connexion.prepareStatement( "DELETE FROM albums WHERE artisteID = ?" );
+					preSta.setInt( 1, Integer.parseInt( artiste.getNum() ) );
+					preSta.executeUpdate();
+
+				} catch ( SQLException se ) {
+					System.out.println( se.getMessage() );
+				}
+
+				// Supprimer l'artiste
+				try {
+					PreparedStatement preSta = connexion
+							.prepareStatement( "DELETE FROM artistes WHERE artisteID = ?" );
+					preSta.setInt( 1, Integer.parseInt( artiste.getNum() ) );
+					preSta.executeUpdate();
+
+				} catch ( SQLException se ) {
+					System.out.println( se.getMessage() );
+				}
+
+			}
+
+		}
+	}
+	
 }

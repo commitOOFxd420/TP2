@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -8,7 +7,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -43,41 +41,40 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 	}
 	public void actionPerformed(ActionEvent e) {
 		
+		modele.connectionBD();
+
+		
 		if(e.getSource() == vueArtiste.btnNouveau) {
 			
-			modele.connectionBD();
 			modele.activerEtVider();
-			modele.fermerBD();
 			vueArtiste.btnAjouter.setEnabled(true);
 			
 		} else if(e.getSource() == vueArtiste.btnAjouter) {
 			
-			modele.connectionBD();
 			modele.insererArtiste();
 			modele.refreshTable(modeleTable);
-			modele.fermerBD();
 			vueArtiste.btnAjouter.setEnabled(false);
 			modele.desactiverEtVider();
 			
 		} else if (e.getSource() == vueArtiste.getBtnModifier()) {			
-			modele.connectionBD();
-			modeleTable = modele.modifierArtiste( modeleTable );
+			modele.modifierArtiste( modeleTable );
 			modele.refreshTable( modeleTable );
 			vueArtiste.btnModifier.setEnabled(false);
 
-			modele.fermerBD();
 			
 		}else if (e.getSource() == vueArtiste.getBtnRemplacer()){
 		
 			
-			//TODO appelé méthode pour modifier l'image		
 			
 		} else if (e.getSource() == vueArtiste.getBtnSupprimer()) {
 			
-			
+			modele.supprimerArtiste( modeleTable );
+			modele.refreshTable( modeleTable );
 			
 		} 
 		
+		modele.fermerBD();
+
 		
 	}
 	
@@ -99,25 +96,21 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 
 	//@Override
 	public void mouseEntered( MouseEvent e ) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	//@Override
 	public void mouseExited( MouseEvent e ) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	//@Override
 	public void mousePressed( MouseEvent e ) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	//@Override
 	public void mouseReleased( MouseEvent e ) {
-		// TODO Auto-generated method stub
 		
 		
 	}
