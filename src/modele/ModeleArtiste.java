@@ -1,10 +1,15 @@
 package modele;
 
 import java.awt.Image;
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vue.VueGestionArtiste;
 
@@ -115,7 +120,6 @@ public class ModeleArtiste {
 					
 					PreparedStatement prt = connexion.prepareStatement(sql);
 					prt.setString(1, nom);
-					System.out.println("1");
 					prt.setBoolean(2, membre);
 					prt.setString(3, "defaut.png");
 					prt.executeUpdate();
@@ -232,7 +236,7 @@ public class ModeleArtiste {
 		
 	}
 	
-	public void refreshTable(ModeleTable modeleTable) {
+	public ModeleTable refreshTable(ModeleTable modeleTable) {
 		ArrayList<Artistes> donnees = this.obtenirContenuTable();
 
 		modeleTable = new ModeleTable( donnees );
@@ -245,6 +249,9 @@ public class ModeleArtiste {
 		vue.getTableau().getColumnModel().getColumn(2).setMaxWidth(50);
 		
 		vue.textNom.setEditable( false );
+		vue.labelImageArtiste.setIcon( null );
+
+		return modeleTable;
 		
 	}
 
@@ -274,7 +281,6 @@ public class ModeleArtiste {
 	}
 	
 	public void supprimerArtiste( ModeleTable modeleTable ) {
-		if ( vue.getTableau().getSelectedRow() != -1 ) {
 			int numLigne = vue.getTableau().getSelectedRow();
 			Artistes artiste = modeleTable.getArtiste( numLigne );
 
@@ -303,7 +309,47 @@ public class ModeleArtiste {
 
 			}
 
+		
+	}
+	
+	
+	public void remplacerImageArtiste( ModeleTable modeleTable ) {
+
+		int numLigne = vue.getTableau().getSelectedRow();
+		Artistes artiste = modeleTable.getArtiste( numLigne );
+
+		JFileChooser fichier = new JFileChooser( chemin + "\\images\\artistes" );
+		FileFilter filtre = new FileNameExtensionFilter( "Fichier image", ImageIO.getReaderFileSuffixes() );
+		fichier.addChoosableFileFilter( filtre );
+		fichier.setAcceptAllFileFilterUsed( false );
+		fichier.showOpenDialog( vue.getFrame().getContentPane() );
+		if ( fichier.getSelectedFile() != null ) {
+			File photo = fichier.getSelectedFile();
+			String nomPhoto = photo.getName();
+
+			try {
+				PreparedStatement preSta = connexion
+						.prepareStatement( "UPDATE artistes SET Photo = ?" + "WHERE ArtisteID = ?" );
+
+				preSta.setString( 1, nomPhoto );
+				preSta.setInt( 2, Integer.parseInt( artiste.getNum() ) );
+
+				preSta.executeUpdate();
+
+				ImageIcon imageIcon = new ImageIcon( photo.getAbsolutePath() );
+				Image image = imageIcon.getImage();
+				Image nouvelleImage = image.getScaledInstance( 100, 100, Image.SCALE_SMOOTH );
+				imageIcon = new ImageIcon( nouvelleImage );
+
+				vue.labelImageArtiste.setIcon( imageIcon );
+				
+				
+			} catch ( SQLException se ) {
+				System.out.println( se.getMessage() );
+			}
+
 		}
+
 	}
 	
 }

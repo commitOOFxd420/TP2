@@ -62,15 +62,18 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 			vueArtiste.btnModifier.setEnabled(false);
 
 			
-		}else if (e.getSource() == vueArtiste.getBtnRemplacer()){
-		
-			
-			
-		} else if (e.getSource() == vueArtiste.getBtnSupprimer()) {
-			
-			modele.supprimerArtiste( modeleTable );
-			modele.refreshTable( modeleTable );
-			
+		} else if ( e.getSource() == vueArtiste.getBtnRemplacer() ) {
+			if ( vueArtiste.getTableau().getSelectedRow() != -1 ) {
+
+				modele.remplacerImageArtiste( modeleTable );
+				modeleTable = modele.refreshTable( modeleTable );
+			}
+
+		} else if ( e.getSource() == vueArtiste.getBtnSupprimer() ) {
+			if ( vueArtiste.getTableau().getSelectedRow() != -1 ) {
+
+				modele.supprimerArtiste( modeleTable );
+			}
 		} 
 		
 		modele.fermerBD();
