@@ -26,7 +26,7 @@ public class VueGestionArtiste {
 	private JTable table;
 	private ControleurArtiste controleur;
 	private JScrollPane scrollPane;
-	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier;
+	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier, btnRecherche;
 	public JCheckBox checkMembre = new JCheckBox("");
 	public JLabel labelImageArtiste, labelImageAlbum;
 	public DefaultListModel<Albums> dataModel = new DefaultListModel<Albums>(); 
@@ -89,9 +89,10 @@ public class VueGestionArtiste {
 		panel.add(textRechercheArtiste);
 		textRechercheArtiste.setColumns(10);
 		
-		JButton btnRecherche = new JButton("Recherche");
+		btnRecherche = new JButton("Recherche");
 		btnRecherche.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnRecherche.setBounds(285, 35, 102, 23);
+		btnRecherche.addActionListener( controleur );
 		panel.add(btnRecherche);
 		
 		JButton btnQuitter = new JButton("Quitter");
@@ -227,5 +228,9 @@ public class VueGestionArtiste {
 	
 	public JCheckBox getcheckMembre() {
 		return checkMembre;
+	}
+	
+	public JButton getBtnRecherche(){
+		return btnRecherche;
 	}
 }

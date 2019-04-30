@@ -74,7 +74,16 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 				vueArtiste.getTableau().setModel( modele.supprimerArtiste( modeleTable ) );
 				modele.refreshTable( modeleTable );
 			}
-		} 
+		} else if (e.getSource() == vueArtiste.getBtnRecherche()) {
+			modeleTable = modele.rechercherArtiste(modeleTable);
+			vueArtiste.getTableau().setModel(modeleTable);
+			vueArtiste.getTableau().getColumnModel().getColumn(0).setMinWidth(25);
+			vueArtiste.getTableau().getColumnModel().getColumn(0).setMaxWidth(25);
+
+			vueArtiste.getTableau().getColumnModel().getColumn(2).setMinWidth(27);
+			vueArtiste.getTableau().getColumnModel().getColumn(2).setMaxWidth(50);
+			
+		}
 		
 		modele.fermerBD();
 		

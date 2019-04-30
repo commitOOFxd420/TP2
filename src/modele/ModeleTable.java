@@ -75,7 +75,7 @@ public class ModeleTable extends AbstractTableModel{
 	}
 	public void setRowCount(int nbDesiree) {
 
-		for (int i = lesDonnees.size() ; nbDesiree <= i ; i--) {
+		for (int i = lesDonnees.size() ; nbDesiree < i ; i--) {
 			
 			lesDonnees.remove( i -1  );
 			fireTableRowsDeleted( i, i );
