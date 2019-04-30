@@ -73,5 +73,26 @@ public class ModeleTable extends AbstractTableModel{
 		lesDonnees.set( row, artiste );
 		lesDonnees.remove( row +1 );
 	}
+	public void setRowCount(int nbDesiree) {
+
+		for (int i = lesDonnees.size() ; nbDesiree <= i ; i--) {
+			
+			lesDonnees.remove( i -1  );
+			fireTableRowsDeleted( i, i );
+			
+		}
+		
+	}	
+	
+	public void deleteRow(int row) {
+		lesDonnees.remove( row );
+		fireTableRowsDeleted( row, row );
+	}
+	
+	public void addRow(Artistes artiste) {
+		lesDonnees.add( artiste );
+		fireTableRowsInserted( 0, getRowCount() );
+	}
+
 
 }

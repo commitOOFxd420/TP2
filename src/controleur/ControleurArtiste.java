@@ -46,15 +46,14 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		
 		if(e.getSource() == vueArtiste.btnNouveau) {
 			
-			modele.activerEtVider();
+			modele.activerEtVider(modeleTable);
 			vueArtiste.btnAjouter.setEnabled(true);
 			
 		} else if(e.getSource() == vueArtiste.btnAjouter) {
 			
-			modele.insererArtiste();
+			vueArtiste.getTableau().setModel(  modele.insererArtiste(modeleTable));
 			modele.refreshTable(modeleTable);
 			vueArtiste.btnAjouter.setEnabled(false);
-			modele.desactiverEtVider();
 			
 		} else if (e.getSource() == vueArtiste.getBtnModifier()) {			
 			modele.modifierArtiste( modeleTable );
@@ -72,16 +71,14 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		} else if ( e.getSource() == vueArtiste.getBtnSupprimer() ) {
 			if ( vueArtiste.getTableau().getSelectedRow() != -1 ) {
 
-				modele.supprimerArtiste( modeleTable );
+				vueArtiste.getTableau().setModel( modele.supprimerArtiste( modeleTable ) );
+				modele.refreshTable( modeleTable );
 			}
 		} 
 		
 		modele.fermerBD();
-
 		
 	}
-	
-
 
 	//@Override
 	public void mouseClicked( MouseEvent e ) {
