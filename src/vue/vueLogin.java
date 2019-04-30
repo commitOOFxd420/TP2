@@ -1,6 +1,7 @@
 package vue;
 
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -30,6 +31,8 @@ public class vueLogin {
 	 */
 	public vueLogin() {
 		initialize();
+		ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\images\\logo.png");
+		frmGestionDesAlbums.setIconImage( img.getImage() );
 	}
 	public JFrame getFrame() {
 		return this.frmGestionDesAlbums;

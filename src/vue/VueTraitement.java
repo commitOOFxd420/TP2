@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 
 import controleur.ControleurTraitement;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class VueTraitement {
@@ -20,6 +21,8 @@ public class VueTraitement {
 	 */
 	public VueTraitement() {
 		initialize();
+		ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\images\\logo.png");
+		frmChoix.setIconImage( img.getImage() );
 	}
 	
 	public JButton getBtnArtiste() {

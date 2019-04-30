@@ -4,14 +4,19 @@ package vue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.JTable;
 
 import controleur.ControleurArtiste;
@@ -26,7 +31,11 @@ public class VueGestionArtiste {
 	private JTable table;
 	private ControleurArtiste controleur;
 	private JScrollPane scrollPane;
+<<<<<<< Upstream, based on origin/master
 	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier, btnRecherche;
+=======
+	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier, btnRecherche, btnQuitter;
+>>>>>>> b1781ca Ajustement de fonction et d'affichage.
 	public JCheckBox checkMembre = new JCheckBox("");
 	public JLabel labelImageArtiste, labelImageAlbum;
 	public DefaultListModel<Albums> dataModel = new DefaultListModel<Albums>(); 
@@ -39,6 +48,8 @@ public class VueGestionArtiste {
 	public VueGestionArtiste() {
 
 		initialize();
+		ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\images\\logo.png");
+		frmGestionsDesArtistes.setIconImage( img.getImage() );
 
 	}
 	
@@ -95,9 +106,10 @@ public class VueGestionArtiste {
 		btnRecherche.addActionListener( controleur );
 		panel.add(btnRecherche);
 		
-		JButton btnQuitter = new JButton("Quitter");
+		btnQuitter = new JButton("Quitter");
 		btnQuitter.setFont(new Font("Verdana", Font.PLAIN, 12));
 		btnQuitter.setBounds(435, 35, 89, 23);
+		btnQuitter.addActionListener( controleur );
 		panel.add(btnQuitter);
 		
 		JLabel lblArtistes = new JLabel("Artistes");
@@ -193,6 +205,8 @@ public class VueGestionArtiste {
 		labelImageAlbum.setFont(new Font("Verdana", Font.PLAIN, 12));
 		labelImageAlbum.setBounds(385, 190, 300, 300);
 		panel.add(labelImageAlbum);
+				
+		table.getColumnModel().getColumn( 0 ).setCellRenderer( new CellsRenderer() );
 		
 		
 		table.getColumnModel().getColumn(0).setMinWidth(25);
