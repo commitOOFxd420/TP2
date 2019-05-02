@@ -36,6 +36,8 @@ public class ControleurTraitement implements ActionListener {
 				login.getFrame().setVisible( true );
 				vue.getFrame().setVisible( false );
 			}
+		} else if ( e.getSource() == vue.getJMenuItem() ) {
+			modele.ouvrirAide();
 		}
 	}
 

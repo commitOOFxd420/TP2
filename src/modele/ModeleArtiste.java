@@ -1,7 +1,9 @@
 package modele;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,10 +24,14 @@ public class ModeleArtiste {
 
 	private Connection connexion = null;
 	private Statement statement = null;
+<<<<<<< Upstream, based on origin/master
 	VueGestionArtiste vue;
 <<<<<<< Upstream, based on origin/master
 	private String chemin = System.getProperty("user.dir");
 =======
+=======
+	private VueGestionArtiste vue;
+>>>>>>> 6f8aa4b Ajout du menu pour accéder à l'aide en ligne dans chaque vue.
 	private String chemin = System.getProperty( "user.dir" );
 >>>>>>> b1781ca Ajustement de fonction et d'affichage.
 	private PreparedStatement preSta = null;
@@ -511,7 +517,7 @@ public class ModeleArtiste {
 			if ( connexion != null ) {
 				// Supprimer les albums reli�s.
 				try {
-					
+
 					preSta = connexion.prepareStatement( "DELETE FROM albums WHERE artisteID = ?" );
 					preSta.setInt( 1, Integer.parseInt( artiste.getNum() ) );
 					preSta.executeUpdate();
@@ -702,6 +708,20 @@ public class ModeleArtiste {
 		}
 
 		return modele;
+
+	}
+
+	public void ouvrirAide() {
+
+		String cheminAide = chemin + "\\aideEnLigne\\index.chm";
+
+		try {
+			File fileFichier = new File( cheminAide );
+			if ( fileFichier.exists() )
+				Desktop.getDesktop().open( fileFichier );
+		} catch ( IOException e ) {
+			System.out.println( e.getMessage() );
+		}
 
 	}
 

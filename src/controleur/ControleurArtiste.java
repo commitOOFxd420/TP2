@@ -17,7 +17,6 @@ import modele.ModeleTable;
 import vue.CellsRenderer;
 import vue.VueGestionArtiste;
 import vue.VueTraitement;
-import vue.vueLogin;
 
 public class ControleurArtiste implements ActionListener, MouseListener, ListSelectionListener {
 
@@ -112,9 +111,9 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 			vueArtiste.btnAjouter.setEnabled( false );
 
 		} else if ( e.getSource() == vueArtiste.getBtnModifier() ) {
-			
+
 			modele.modifierArtiste( modeleTable );
-			modeleTable =  modele.refreshTable( modeleTable );
+			modeleTable = modele.refreshTable( modeleTable );
 			vueArtiste.getTableau().setModel( modeleTable );
 			vueArtiste.btnModifier.setEnabled( false );
 
@@ -144,8 +143,8 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 			vueArtiste.getTableau().getColumnModel().getColumn( 2 ).setMinWidth( 27 );
 			vueArtiste.getTableau().getColumnModel().getColumn( 2 ).setMaxWidth( 50 );
 
-		} else if (e.getSource() == vueArtiste.btnQuitter) {
-			
+		} else if ( e.getSource() == vueArtiste.btnQuitter ) {
+
 			int n = JOptionPane.showConfirmDialog( vueArtiste.getFrame(),
 					"Vous allez revenir à la fenêtre précédente. Continuez ?", "Retour", JOptionPane.YES_NO_OPTION );
 
@@ -154,7 +153,11 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 				traitement.getFrame().setVisible( true );
 				vueArtiste.getFrame().setVisible( false );
 			}
-			
+
+		} else if ( e.getSource() == vueArtiste.getMenuItem() ) {
+
+			modele.ouvrirAide();
+
 		}
 
 		modele.fermerBD();
