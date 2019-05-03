@@ -29,16 +29,8 @@ public class VueGestionArtiste {
 	private JTable table;
 	private ControleurArtiste controleur;
 	private JScrollPane scrollPane;
-<<<<<<< Upstream, based on origin/master
-	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier, btnRecherche;
-=======
 	public JButton btnNouveau, btnRemplacer, btnSupprimer, btnAjouter, btnModifier, btnRecherche, btnQuitter;
-<<<<<<< Upstream, based on origin/master
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
-	public JCheckBox checkMembre = new JCheckBox("");
-=======
 	public JCheckBox checkMembre = new JCheckBox( "" );
->>>>>>> 6f8aa4b Ajout du menu pour accéder à l'aide en ligne dans chaque vue.
 	public JLabel labelImageArtiste, labelImageAlbum;
 	public DefaultListModel<Albums> dataModel = new DefaultListModel<Albums>();
 	public JList<Albums> listAlbums;
@@ -198,33 +190,7 @@ public class VueGestionArtiste {
 		btnModifier.setBounds( 427, 173, 107, 23 );
 		btnModifier.setEnabled( false );
 		btnModifier.addActionListener( controleur );
-<<<<<<< Upstream, based on origin/master
-		panel.add(btnModifier);
-		
-		btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setFont(new Font("Verdana", Font.PLAIN, 12));
-		btnSupprimer.setBounds(427, 207, 107, 23);
-		btnSupprimer.addActionListener( controleur );
-		panel.add(btnSupprimer);
-		
-		labelImageArtiste = new JLabel();
-		labelImageArtiste.setFont(new Font("Verdana", Font.PLAIN, 12));
-		labelImageArtiste.setBounds(5, 100, 110, 110);
-		panel.add(labelImageArtiste);
-		
-		labelImageAlbum = new JLabel();
-		labelImageAlbum.setFont(new Font("Verdana", Font.PLAIN, 12));
-		labelImageAlbum.setBounds(385, 190, 300, 300);
-		panel.add(labelImageAlbum);
-				
-		table.getColumnModel().getColumn( 0 ).setCellRenderer( new CellsRenderer() );
-		
-		
-		table.getColumnModel().getColumn(0).setMinWidth(25);
-		table.getColumnModel().getColumn(0).setMaxWidth(25);
-=======
 		panel.add( btnModifier );
->>>>>>> 6f8aa4b Ajout du menu pour accéder à l'aide en ligne dans chaque vue.
 
 		btnSupprimer = new JButton( "Supprimer" );
 		btnSupprimer.setFont( new Font( "Verdana", Font.PLAIN, 12 ) );

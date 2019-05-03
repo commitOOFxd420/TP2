@@ -42,60 +42,8 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		return table;
 
 	}
-<<<<<<< Upstream, based on origin/master
-	public void actionPerformed(ActionEvent e) {
-		
-		modele.connectionBD();
-
-		
-		if(e.getSource() == vueArtiste.btnNouveau) {
-			
-			modele.activerEtVider(modeleTable);
-			vueArtiste.btnAjouter.setEnabled(true);
-			
-		} else if(e.getSource() == vueArtiste.btnAjouter) {
-			
-			vueArtiste.getTableau().setModel(  modele.insererArtiste(modeleTable));
-			modele.refreshTable(modeleTable);
-			vueArtiste.btnAjouter.setEnabled(false);
-			
-		} else if (e.getSource() == vueArtiste.getBtnModifier()) {			
-			modele.modifierArtiste( modeleTable );
-			modele.refreshTable( modeleTable );
-			vueArtiste.btnModifier.setEnabled(false);
-
-			
-		} else if ( e.getSource() == vueArtiste.getBtnRemplacer() ) {
-			if ( vueArtiste.getTableau().getSelectedRow() != -1 ) {
-
-				modele.remplacerImageArtiste( modeleTable );
-				modeleTable = modele.refreshTable( modeleTable );
-			}
-
-		} else if ( e.getSource() == vueArtiste.getBtnSupprimer() ) {
-			if ( vueArtiste.getTableau().getSelectedRow() != -1 ) {
-
-				vueArtiste.getTableau().setModel( modele.supprimerArtiste( modeleTable ) );
-				modele.refreshTable( modeleTable );
-			}
-		} else if (e.getSource() == vueArtiste.getBtnRecherche()) {
-			modeleTable = modele.rechercherArtiste(modeleTable);
-			vueArtiste.getTableau().setModel(modeleTable);
-			vueArtiste.getTableau().getColumnModel().getColumn(0).setMinWidth(25);
-			vueArtiste.getTableau().getColumnModel().getColumn(0).setMaxWidth(25);
-
-			vueArtiste.getTableau().getColumnModel().getColumn(2).setMinWidth(27);
-			vueArtiste.getTableau().getColumnModel().getColumn(2).setMaxWidth(50);
-			
-		}
-		
-		modele.fermerBD();
-		
-	}
-=======
 
 	public void actionPerformed( ActionEvent e ) {
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
 
 		modele.connectionBD();
 
@@ -161,10 +109,6 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 		}
 
 		modele.fermerBD();
-<<<<<<< Upstream, based on origin/master
-		
-		}else if (e.getClickCount() == 2) {
-=======
 
 	}
 
@@ -178,46 +122,28 @@ public class ControleurArtiste implements ActionListener, MouseListener, ListSel
 			modele.fermerBD();
 
 		} else if ( e.getClickCount() == 2 ) {
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
 			modele.activerModification();
 		}
 	}
 
 	// @Override
 	public void mouseEntered( MouseEvent e ) {
-<<<<<<< Upstream, based on origin/master
-		
-=======
 
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
 	}
 
 	// @Override
 	public void mouseExited( MouseEvent e ) {
-<<<<<<< Upstream, based on origin/master
-		
-=======
 
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
 	}
 
 	// @Override
 	public void mousePressed( MouseEvent e ) {
-<<<<<<< Upstream, based on origin/master
-		
-=======
 
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
 	}
 
 	// @Override
 	public void mouseReleased( MouseEvent e ) {
-<<<<<<< Upstream, based on origin/master
-		
-		
-=======
 
->>>>>>> b1781ca Ajustement de fonction et d'affichage.
 	}
 
 	// @Override
